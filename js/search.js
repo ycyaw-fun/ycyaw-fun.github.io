@@ -3,7 +3,7 @@ var searchFunc = function (path, search_id, content_id) {
     $.ajax({
         url: path,
         dataType: "xml",
-        success: function (dates) {
+        success: function (xmlResponse) {
             // get the contents from search data
             var datas = $("entry", xmlResponse).map(function () {
                 return {
