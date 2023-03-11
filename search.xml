@@ -38,7 +38,8 @@ export CLASSPATH=.:$JAVA_HOME/lib/dt.jar:$JAVA_HOME/lib/tolls.jar   <span aria-h
     <title>mysql主从复制</title>
     <url>/2023/03/11/mysqlzhu-cong-fu-zhi/</url>
     <content><![CDATA[<h1 id="一、主从库准备"><a href="#一、主从库准备" class="headerlink" title="一、主从库准备"></a>一、主从库准备</h1><h2 id="1、-安装"><a href="#1、-安装" class="headerlink" title="1、 安装"></a>1、 <a href="https://www.ycyaw.fun/2023/03/09/mysqlan-zhuang/" title="MySQL安装">安装</a></h2><h2 id="2、-修改配置"><a href="#2、-修改配置" class="headerlink" title="2、 修改配置"></a>2、 修改配置</h2><h3 id="1-主库master配置"><a href="#1-主库master配置" class="headerlink" title="1. 主库master配置"></a>1. 主库master配置</h3><ol>
-<li>修改配置文件/etc/my.conf,添加下面信息<pre class="line-numbers language-none"><code class="language-none"># 配置要同步的数据库
+<li><p>修改配置文件/etc/my.conf,添加下面信息</p>
+<pre class="line-numbers language-none"><code class="language-none"># 配置要同步的数据库
 binlog-do-db=test
 #去除不用同步的数据库
 binlog-ignore-db=mysql
@@ -51,12 +52,16 @@ expire_logs_days=30
 log-bin=mysql-bin
 # Master的id,在整个主从集群中必须唯一
 server-id=1<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-主从同步原理就是从库读取主库log_bin文件同步  </li>
-<li>创建同步使用的用户并授权<pre class="line-numbers language-none"><code class="language-none">create user 'back_slave'@'106.75.147.252' IDENTIFIED BY 'root';
+<p>主从同步原理就是从库读取主库log_bin文件同步  </p>
+</li>
+<li><p>创建同步使用的用户并授权</p>
+<pre class="line-numbers language-none"><code class="language-none">create user 'back_slave'@'106.75.147.252' IDENTIFIED BY 'root';
 grant file on *.* to 'back_slave'@'106.75.147.252';
 GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* to 'back_slave'@'106.75.147.252';<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-修改后重启数据库<pre class="line-numbers language-none"><code class="language-none">systemctl restart mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>查看master状态<br>首先确认log_bin开启<pre class="line-numbers language-none"><code class="language-none">show variables like '%log_bin%';<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>修改后重启数据库</p>
+<pre class="line-numbers language-none"><code class="language-none">systemctl restart mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>查看master状态<br>首先确认log_bin开启</p>
+<pre class="line-numbers language-none"><code class="language-none">show variables like '%log_bin%';<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <table>
 <thead>
 <tr>
@@ -88,11 +93,8 @@ GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* to 'back_slave'@'106.75.147.2
 <td>sql_log_bin</td>
 <td>ON</td>
 </tr>
-<tr>
-<td>看到log_bin是ON就是开启了</td>
-<td></td>
-</tr>
 </tbody></table>
+<p> 看到log_bin是ON就是开启了  </p>
 <pre class="line-numbers language-none"><code class="language-none">show master status;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <table>
 <thead>
@@ -111,26 +113,27 @@ GRANT REPLICATION SLAVE, REPLICATION CLIENT ON *.* to 'back_slave'@'106.75.147.2
 <td></td>
 <td></td>
 </tr>
-<tr>
-<td>记住File和Position等下配置从库需要（不记也行等下再查）到此master就配置完成了</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
 </tbody></table>
+<p> 记住File和Position等下配置从库需要（不记也行等下再查）到此master就配置完成了</p>
 <h3 id="2-从库slave配置"><a href="#2-从库slave配置" class="headerlink" title="2. 从库slave配置"></a>2. 从库slave配置</h3></li>
-<li>修改配置文件/etc/my.conf<pre class="line-numbers language-none"><code class="language-none"># 服务器的ID，集群内唯一
+<li><p>修改配置文件/etc/my.conf</p>
+<pre class="line-numbers language-none"><code class="language-none"># 服务器的ID，集群内唯一
 server-id=2
 read_only = 1  #可以设置只读
 master_info_repository=TABLE
 relay_log_info_repository=TABLE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
-<li>重启从路slave<pre class="line-numbers language-none"><code class="language-none">systemctl restart mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>添加master<pre class="line-numbers language-none"><code class="language-none">change master to master_host='150.158.100.77',master_port=3306,master_user='back_slave',master_password='root',master_log_file='binlog.000005',master_log_pos=1648;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-<li>查看slave信息<pre class="line-numbers language-none"><code class="language-none">show slave status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-Slave_IO_Running和Slave_SQLRunning 都为Yes则成功<br>否则检查（server_id、账号权限是否正确、权限刷新与否、IP、端口等）</li>
-<li>slave开始与结束命令<br>开始<pre class="line-numbers language-none"><code class="language-none">start slave;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-结束<pre class="line-numbers language-none"><code class="language-none">stop slave;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>重启从路slave</p>
+<pre class="line-numbers language-none"><code class="language-none">systemctl restart mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>添加master</p>
+<pre class="line-numbers language-none"><code class="language-none">change master to master_host='150.158.100.77',master_port=3306,master_user='back_slave',master_password='root',master_log_file='binlog.000005',master_log_pos=1648;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>查看slave信息</p>
+<pre class="line-numbers language-none"><code class="language-none">show slave status<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Slave_IO_Running和Slave_SQLRunning 都为Yes则成功<br>否则检查（server_id、账号权限是否正确、权限刷新与否、IP、端口等）</p>
+</li>
+<li><p>slave开始与结束命令<br>开始</p>
+<pre class="line-numbers language-none"><code class="language-none">start slave;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>结束</p>
+<pre class="line-numbers language-none"><code class="language-none">stop slave;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
 </ol>
 ]]></content>
       <categories>
