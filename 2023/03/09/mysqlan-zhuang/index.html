@@ -4,8 +4,15 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="contact, 又菜又爱玩">
-    <meta name="description" content="又菜又爱玩">
+    <meta name="keywords" content="mysql安装, 又菜又爱玩">
+    <meta name="description" content="安装
+从官网下载mysql版本根据需求定  
+
+解压   
+tar-zxvf mysql7.1.tar
+重命名文件夹  
+mv mysql7.1 mysql
+在mysql目录中创建logs目录(存放日志的目录)、data目录(存放数据的目录">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +24,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>contact | 又菜又爱玩</title>
+    <title>mysql安装 | 又菜又爱玩</title>
     <link rel="icon" type="image/png" href="/favicon.png">
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
@@ -250,12 +257,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">contact</h1>
+                    <h1 class="description center-align post-title">mysql安装</h1>
                 </div>
             </div>
         </div>
@@ -369,12 +376,29 @@
             <div class="row tag-cate">
                 <div class="col s7">
                     
-                          <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
-                          </div>
+                    <div class="article-tag">
+                        
+                            <a href="/tags/mysql/">
+                                <span class="chip bg-color">mysql</span>
+                            </a>
+                        
+                            <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                <span class="chip bg-color">数据库</span>
+                            </a>
+                        
+                    </div>
                     
                 </div>
                 <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fas fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/mysql/" class="post-category">
+                                mysql
+                            </a>
+                        
+                    </div>
                     
                 </div>
             </div>
@@ -383,28 +407,28 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2023-03-08
+                    2023-03-09
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-03-08
+                    2023-03-11
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-file-word fa-fw"></i>文章字数:&nbsp;&nbsp;
-                    0
+                    562
                 </div>
                 
 
                 
                 <div class="info-break-policy">
                     <i class="far fa-clock fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                    1 分
+                    2 分
                 </div>
                 
 
@@ -427,7 +451,74 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                
+                <h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><ol>
+<li><p>从官网下载mysql版本根据需求定  </p>
+</li>
+<li><p>解压   </p>
+<pre class="line-numbers language-none"><code class="language-none">tar-zxvf mysql7.1.tar<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>重命名文件夹  </p>
+<pre class="line-numbers language-none"><code class="language-none">mv mysql7.1 mysql<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>在mysql目录中创建logs目录(存放日志的目录)、data目录(存放数据的目录)</p>
+<pre class="line-numbers language-none"><code class="language-none">cd mysql
+mkdir logs
+mkdir data<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p> 初始化mysql数据库,本次操作会出现一个密码，是临时登录密码，用户第一次登录，一定要记住</p>
+<pre class="line-numbers language-none"><code class="language-none">mysqld --initialize --user=root --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>修改my.cnf文件  </p>
+<pre class="line-numbers language-none"><code class="language-none">vim /etc/my.cnf<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>my.conf中添加如下内容</p>
+<pre class="line-numbers language-none"><code class="language-none">[mysqld]
+basedir=/usr/local/mysql
+datadir=/usr/local/mysql/data
+socket=/tmp/mysql.sock
+user=root
+port=3306
+character_set_server=utf8
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+# mysql5.7.x版本，sql_mode默认是开启了 ONLY_FULL_GROUP_BY 模式的，但开启这个模式后，原先的 group by 语句就报错，所以直接把它移除
+# 不同版本sql_mode可能不一样，高版本可能去掉一些低版本存在的，会导致启动失败，可以不要这句
+sql_mode=STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION
+[mysqld_safe]
+log-error=/usr/local/mysql/data/error.log
+pid-file=/usr/local/mysql/data/mysqld.pid
+tmpdir=/tmp<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+<li><p>把mysql添加到系统服务中，在mysql的目录中 </p>
+<pre class="line-numbers language-none"><code class="language-none">cp support-files/mysql.server /etc/init.d/mysqld <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li><p>编辑/etc/init.d下mysqld文件</p>
+<pre class="line-numbers language-none"><code class="language-none">vim /etc/init.d/mysqld<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>修改如下内容</p>
+<pre class="line-numbers language-none"><code class="language-none">basedir=/home/apps/mysql
+datadir=/home/apps/mysql/data
+mysqld_pid_file_path=/usr/local/mysql/data/mysqld_pid<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre></li>
+<li><p>启动mysql服务  </p>
+<pre class="line-numbers language-none"><code class="language-none">service mysqld start <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>Starting MySQL.Logging to’/home/apps/mysql/data/error.log’.<br>SUCCESS!  </p>
+<p> 看到上面信息启动成功  </p>
+</li>
+<li><p>登录mysql(需要用到第五步的初始密码)在mysql的bin目录下  </p>
+<pre class="line-numbers language-none"><code class="language-none">cd bin
+./mysql -u root -p(加上第九步的密码)<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>修改root用户的密码  </p>
+<pre class="line-numbers language-none"><code class="language-none">use mysql;
+ALTER USER 'root'@'localhost'IDENTIFIED BY '你的密码';<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>配置mysql的远程访问</p>
+<pre class="line-numbers language-none"><code class="language-none">use mysql;  
+update user set host='%' where user='root' limit 1;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre></li>
+<li><p>刷新权限</p>
+<pre class="line-numbers language-none"><code class="language-none">flush privileges;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+</ol>
+<h1 id="忘记密码"><a href="#忘记密码" class="headerlink" title="忘记密码"></a>忘记密码</h1><ol>
+<li>在/etc/my.conf 配置文件的[mysqld]下加 skip-grant-tables  </li>
+<li>重启mysql服务 service mysqld restart  </li>
+<li>到MySQL下的bin目录 ./mysql -uroot -p   #直接按回车，这时不需要输入root密码  </li>
+<li>选用mysql数据库 use mysql  <pre class="line-numbers language-none"><code class="language-none">ALTER USER 'root'@'localhost'IDENTIFIED BY '你的密码';<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>如第五报The MySQL server is running with the –skip-grant-tables option so it cannot execute this statement错误 先执行 flush privileges 刷新权限<pre class="line-numbers language-none"><code class="language-none">flush privileges;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>退出 <pre class="line-numbers language-none"><code class="language-none">exit<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
+<li>去掉/etc/my.conf的 skip-grant-tables</li>
+<li>重启服务 service mysqld restart</li>
+</ol>
+
                 
             </div>
             <hr/>
@@ -453,7 +544,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://www.ycyaw.fun/contact/index.html">https://www.ycyaw.fun/contact/index.html</a>
+                    <a href="https://www.ycyaw.fun/2023/03/09/mysqlan-zhuang/">https://www.ycyaw.fun/2023/03/09/mysqlan-zhuang/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -490,7 +581,15 @@
                 <div class="post-meta__tag-list" style="display: inline-block;">
                     
                         <div class="article-tag">
-                            <span class="chip bg-color">无标签</span>
+                            
+                                <a href="/tags/mysql/">
+                                    <span class="chip bg-color">mysql</span>
+                                </a>
+                            
+                                <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                                    <span class="chip bg-color">数据库</span>
+                                </a>
+                            
                         </div>
                     
                 </div>
@@ -660,18 +759,17 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="far fa-dot-circle"></i>&nbsp;本篇
-            </div>
+                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/contact/index.html">
+                <a href="/2023/03/11/mysqlzhu-cong-fu-zhi/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="contact">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="mysql主从复制">
                         
-                        <span class="card-title">contact</span>
+                        <span class="card-title">mysql主从复制</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -681,18 +779,37 @@
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-08
-                            </span>
+                        <span class="publish-date">
+                            <i class="far fa-clock fa-fw icon-date"></i>2023-03-11
+                        </span>
                         <span class="publish-author">
                             
-                            <i class="fas fa-user fa-fw"></i>
-                            菜鸟
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/mysql/" class="post-category">
+                                    mysql
+                                </a>
+                            
                             
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/mysql/">
+                        <span class="chip bg-color">mysql</span>
+                    </a>
+                    
+                    <a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+                        <span class="chip bg-color">数据库</span>
+                    </a>
+                    
+                    <a href="/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/">
+                        <span class="chip bg-color">主从复制</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>
@@ -700,16 +817,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/contact/index.html">
+                <a href="/2023/03/09/javaan-zhuang/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/16.jpg" class="responsive-img" alt="contact">
+                        <img src="/medias/featureimages/18.jpg" class="responsive-img" alt="java安装">
                         
-                        <span class="card-title">contact</span>
+                        <span class="card-title">java安装</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -720,7 +837,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-08
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-03-09
                             </span>
                         <span class="publish-author">
                             
@@ -730,7 +847,18 @@
                         </span>
                     </div>
                 </div>
-
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                    <a href="/tags/jdk/">
+                        <span class="chip bg-color">jdk</span>
+                    </a>
+                    
+                </div>
                 
             </div>
         </div>

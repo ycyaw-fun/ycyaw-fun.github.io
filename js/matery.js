@@ -173,11 +173,13 @@ $(function () {
 /* 深色模式按钮设置 */
 if (localStorage.getItem("dark") === "1") {
     document.body.classList.add("dark");
+    localStorage.setItem("dark", "1");
+    $("#nightMode").removeClass("fa-moon").addClass("fa-lightbulb");
 } else {
     /*定时开启暗色模式<默认晚22点至早6点默认开启>*/
     if (new Date().getHours() >= 22 || new Date().getHours() < 6) {
         document.body.classList.add("dark");
-        $("#nightMode").removeClass("fa-moon-o").addClass("fa-lightbulb");
+        $("#nightMode").removeClass("fa-moon").addClass("fa-lightbulb");
     } else {
         if (matchMedia("(prefers-color-scheme: dark)").matches) {
             document.body.classList.add("dark");
@@ -197,6 +199,7 @@ setTimeout(function () {
         M.toast({ html: toastHTML });
     }
 }, 2200);
+
 
 /* 深色模式设置*/
 function switchNightMode() {

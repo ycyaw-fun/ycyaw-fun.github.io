@@ -39,7 +39,8 @@ pre[class*="language-"] {
 
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
-	background: #2d2d2d;
+	/* background: #2d2d2d; */
+	background: #ccc;
 }
 
 /* Inline code */
@@ -131,7 +132,8 @@ pre[class*="language-"] {
 	padding: inherit 0;
 	margin-top: 1em; /* Same as .prism’s padding-top */
 
-	background: hsla(24, 20%, 50%,.08);
+	background: #ccc;
+	/* background: hsla(24, 20%, 50%,.08); */
 	background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
 
 	pointer-events: none;
@@ -199,6 +201,7 @@ pre[class*="language-"].line-numbers {
 pre[class*="language-"].line-numbers > code {
 	position: sticky;
 	white-space: inherit;
+	color: black;
 }
 
 .line-numbers .line-numbers-rows {
@@ -225,7 +228,7 @@ pre[class*="language-"].line-numbers > code {
 
 .line-numbers-rows > span:before {
 	content: counter(linenumber);
-	color: #999;
+	color: #2d2d2d;
 	display: block;
 	padding-right: 0.8em;
 	text-align: right;

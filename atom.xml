@@ -6,7 +6,7 @@
   <link href="https://www.ycyaw.fun/atom.xml" rel="self"/>
   
   <link href="https://www.ycyaw.fun/"/>
-  <updated>2023-03-09T07:08:28.477Z</updated>
+  <updated>2023-03-11T13:58:55.236Z</updated>
   <id>https://www.ycyaw.fun/</id>
   
   <author>
@@ -17,12 +17,80 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>mysql主从复制</title>
+    <link href="https://www.ycyaw.fun/2023/03/11/mysqlzhu-cong-fu-zhi/"/>
+    <id>https://www.ycyaw.fun/2023/03/11/mysqlzhu-cong-fu-zhi/</id>
+    <published>2023-03-11T13:45:27.458Z</published>
+    <updated>2023-03-11T13:58:55.236Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;一、主从库准备&quot;&gt;&lt;a href=&quot;#一、主从库准备&quot; class=&quot;headerlink&quot; title=&quot;一、主从库准备&quot;&gt;&lt;/a&gt;一、主从库准备&lt;/h1&gt;&lt;h2 id=&quot;1、-安装&quot;&gt;&lt;a href=&quot;#1、-安装&quot; class=&quot;headerlink&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="mysql" scheme="https://www.ycyaw.fun/categories/mysql/"/>
+    
+    
+    <category term="mysql" scheme="https://www.ycyaw.fun/tags/mysql/"/>
+    
+    <category term="数据库" scheme="https://www.ycyaw.fun/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+    <category term="主从复制" scheme="https://www.ycyaw.fun/tags/%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>mysql安装</title>
+    <link href="https://www.ycyaw.fun/2023/03/09/mysqlan-zhuang/"/>
+    <id>https://www.ycyaw.fun/2023/03/09/mysqlan-zhuang/</id>
+    <published>2023-03-09T15:57:01.160Z</published>
+    <updated>2023-03-11T08:36:02.713Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;安装&quot;&gt;&lt;a href=&quot;#安装&quot; class=&quot;headerlink&quot; title=&quot;安装&quot;&gt;&lt;/a&gt;安装&lt;/h1&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;从官网下载mysql版本根据需求定  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;解压   &lt;/p&gt;
+&lt;pre</summary>
+        
+      
+    
+    
+    
+    <category term="mysql" scheme="https://www.ycyaw.fun/categories/mysql/"/>
+    
+    
+    <category term="mysql" scheme="https://www.ycyaw.fun/tags/mysql/"/>
+    
+    <category term="数据库" scheme="https://www.ycyaw.fun/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+  </entry>
+  
+  <entry>
     <title>java安装</title>
     <link href="https://www.ycyaw.fun/2023/03/09/javaan-zhuang/"/>
     <id>https://www.ycyaw.fun/2023/03/09/javaan-zhuang/</id>
     <published>2023-03-09T07:02:12.196Z</published>
-    <updated>2023-03-09T07:08:28.477Z</updated>
+    <updated>2023-03-09T11:10:05.124Z</updated>
     
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h2 id=&quot;方式一：yum源安装&quot;&gt;&lt;a href=&quot;#方式一：yum源安装&quot; class=&quot;headerlink&quot; title=&quot;方式一：yum源安装&quot;&gt;&lt;/a&gt;方式一：yum源安装&lt;/h2&gt;&lt;h3 id=&quot;1、列出可用的jdk&quot;&gt;&lt;a</summary>
+        
+      
     
     
     
@@ -38,7 +106,7 @@
     <link href="https://www.ycyaw.fun/2023/03/08/hello-world/"/>
     <id>https://www.ycyaw.fun/2023/03/08/hello-world/</id>
     <published>2023-03-08T04:30:37.634Z</published>
-    <updated>1985-10-26T08:15:00.000Z</updated>
+    <updated>2023-03-09T15:54:32.213Z</updated>
     
     
       

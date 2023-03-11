@@ -118,6 +118,8 @@ pre {
     margin-top: 12px;
     -webkit-box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
     box-shadow: 20px 0 #ffbd2e, 40px 0 #27c93f;
+    color: #272822;
+    background-color: #e8eaf6;
 }
 
 code {
@@ -1243,7 +1245,7 @@ thead {
 }
 
 #articleContent table th {
-    background-color: #f2f2f2;
+    /* background-color: #f2f2f2; */
     min-width: 80px;
     border: 1px solid #dfe2e5;
     padding: 6px 6px;
